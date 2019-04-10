@@ -16,14 +16,14 @@ let template = (userid, amount, memo) => `
     try {
       var a = {
         actionType: "scan",
-        u: ${userid},
-        a: ${amount},
-        m: ${memo},
+        u: "${userid}",
+        a: "${amount}",
+        m: "${memo}",
         biz_data: {
           s: "money",
-          u: ${userid},
-          a: ${amount},
-          m: ${memo}
+          u: "${userid}",
+          a: "${amount}",
+          m: "${memo}"
         }
       }
     } catch (b) {
