@@ -51,7 +51,7 @@ http.createServer((req,res) => {
 
   if (req.url.startsWith('/api')) {
 
-    const params = url.parse(req.url, true)
+    const params = url.parse(req.url.slice(4), true)
     const {userid ="2088521328947850", amount="100", memo="test"} = params.query || {}
     const html = template(userid, amount, memo)
 
