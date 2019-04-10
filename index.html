@@ -30,7 +30,7 @@
     const formdata = new FormData(form)
     const [userid, amount, memo] = formdata.getAll('data')
 
-    const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?userid=${userid}&amount=${amount}&memo=${memo}`
+    const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?${userid},${amount},${memo}`
     console.log(query)
     new QRCode(document.getElementById("qrcode"), query)
   })

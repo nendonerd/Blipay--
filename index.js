@@ -43,7 +43,9 @@ let template = (userid, amount, memo) => `
 
 
 // request example:
-// alipays://platformapi/startapp?appId=20000067&url=http://${DOMAIN}/api/?userid=222&amount=222&memo=222
+// alipays://platformapi/startapp?appId=20000067&url=http://${DOMAIN}/api/?22222222,100,aaa
+// alipay browser do not allow & in url
+// have to use ',' instead and write a custom parse func
 
 http.createServer((req,res) => {
   let cache = new Map()
@@ -51,9 +53,9 @@ http.createServer((req,res) => {
 
   if (req.url.startsWith('/api')) {
     console.log(req.url)
-    const params = url.parse(req.url.slice(4), true)
-    console.log(params)
-    let {userid ="2088521328947850", amount="100", memo="test"} = params.query || {}
+    // const params = url.parse(req.url.slice(4), true)
+    // let {userid ="2088521328947850", amount="100", memo="test"} = params.query || {}
+    let [userid, amount, memo] = req.url.slice(6).split(",")
     console.log(userid, amount, memo)
     let html = template(userid, amount, memo)
 
