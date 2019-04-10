@@ -1,38 +1,63 @@
-<style>
-  /* hide input spinners */
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-</style>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      /* hide input spinners */
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
-<form id='form' autocomplete="off">
-  <input type="number" placeholder="userid: Number" id="userid" name="data">
-  <input type="number" placeholder="amount: Number" id="amount" name="data">
-  <input type="text" placeholder="memo: String" id="memo" name="data">
-  <input type="submit">
-</form>
+      /* some style */
+      input {
+        display: block;
+        font-size: 1.2em;
+      }
+      input[type=submit] {
+        /* font-size: 2em; */
+        background-color: lightcoral;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
 
-<div id="qrcode"></div>
+    <form id='form' autocomplete="off">
+      <label for="userid">收款支付宝账户userid <a href="https://www.dedemao.com/alipay/authorize_demo.php" target="_blank">如何获取？</a></label>
+      <input type="number" placeholder="userid: Number" id="userid" name="data">
+      <br>
+      <label for="amount">收款金额</label>
+      <input type="number" placeholder="amount: Number" id="amount" name="data">
+      <br>
+      <label for="memo">收款备注（可用作token）</label>
+      <input type="text" placeholder="memo: String" id="memo" name="data">
+      <br>
+      <input type="submit">
+    </form>
 
-<script src="./qrcode.min.js">
+    <div id="qrcode"></div>
 
-</script>
-<script type="text/javascript">
+    <script src="./qrcode.min.js">
 
-  const form = document.querySelector('#form')
-  const qrcode = document.querySelector('#qrcode')
+    </script>
+    <script type="text/javascript">
 
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    qrcode.innerHTML = ''
-    const formdata = new FormData(form)
-    const [userid, amount, memo] = formdata.getAll('data')
+      const form = document.querySelector('#form')
+      const qrcode = document.querySelector('#qrcode')
 
-    const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?${userid},${amount},${memo}`
-    console.log(query)
-    new QRCode(document.getElementById("qrcode"), query)
-  })
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        qrcode.innerHTML = ''
+        const formdata = new FormData(form)
+        const [userid, amount, memo] = formdata.getAll('data')
 
-</script>
+        const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?${userid},${amount},${memo}`
+        console.log(query)
+        new QRCode(document.getElementById("qrcode"), query)
+      })
+
+    </script>
+  </body>
+
+</html>
