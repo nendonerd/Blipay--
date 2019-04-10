@@ -53,7 +53,7 @@ http.createServer((req,res) => {
 
   if (req.url.startsWith('/api')) {
     console.log(req.url)
-    let [userid ="2088102669974222", amount="1", memo="test"] = req.url.slice(6).split(",")
+    let [userid ="2088102669974222", amount="1", memo="test"] = req.url.slice(6).split(",") || []
     console.log(userid, amount, memo)
     let html = template(userid, amount, memo)
 
