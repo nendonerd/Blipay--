@@ -24,7 +24,7 @@
   <body>
 
     <form id='form' autocomplete="off">
-      <label for="userid">收款支付宝账户userid <a href="https://www.dedemao.com/alipay/authorize_demo.php" target="_blank">如何获取？</a></label>
+      <label for="userid"></label>收款支付宝账户userid <a href="https://www.dedemao.com/alipay/authorize_demo.php" target="_blank">如何获取？</a></label>
       <input type="number" placeholder="userid: Number" id="userid" name="data">
       <br>
       <label for="amount">收款金额</label>
@@ -54,7 +54,10 @@
 
         const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?${userid},${amount},${memo}`
         console.log(query)
-        new QRCode(document.getElementById("qrcode"), query)
+        new QRCode(qrcode, query)
+        let p = document.createElement('p')
+        p.innerText = '请使用支付宝扫描二维码支付'
+        qrcode.append(p)
       })
 
     </script>
