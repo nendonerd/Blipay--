@@ -71,7 +71,7 @@ http.createServer((req,res) => {
     if (filePath.endsWith('.js')) { mimeType = 'text/javascript'}
     if (filePath.endsWith('.png')) { mimeType = 'image/png'}
 
-    if (filePath == './') {
+    if (filePath == './' || filePath.length > 20) {
       filePath = './index.html';
     }
 
