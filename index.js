@@ -1,8 +1,7 @@
 const http = require('http')
 const url = require('url')
 const fs = require('fs')
-const NODE_ENV = process.env.NODE_ENV
-const port = NODE_ENV === 'production' ? 80 : 3007
+const port = 3000
 
 let template = (userid, amount, memo) => `
 <script>
@@ -90,11 +89,6 @@ http.createServer((req,res) => {
     }
   }
 
-}).listen(port, null, null, () => {
-  if (NODE_ENV === 'production') {
-    process.setgid('wang3721_2011')
-    process.setuid('wang3721_2011')
-  }
-})
+}).listen(port)
 
 
