@@ -91,8 +91,10 @@ http.createServer((req,res) => {
   }
 
 }).listen(port, null, null, () => {
-  process.setgid('nobody')
-  process.setuid('nobody')
+  if (NODE_ENV === 'production') {
+    process.setgid('wang3721_2011')
+    process.setuid('wang3721_2011')
+  }
 })
 
 
