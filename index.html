@@ -1,0 +1,38 @@
+<style>
+  /* hide input spinners */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
+
+<form id='form' autocomplete="off">
+  <input type="number" placeholder="userid: Number" id="userid" name="data">
+  <input type="number" placeholder="amount: Number" id="amount" name="data">
+  <input type="text" placeholder="memo: String" id="memo" name="data">
+  <input type="submit">
+</form>
+
+<div id="qrcode"></div>
+
+<script src="./qrcode.min.js">
+
+</script>
+<script type="text/javascript">
+
+  const form = document.querySelector('#form')
+  const qrcode = document.querySelector('#qrcode')
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    qrcode.innerHTML = ''
+    const formdata = new FormData(form)
+    const [userid, amount, memo] = formdata.getAll('data')
+
+    const query = `alipays://platformapi/startapp?appId=20000067&url=${location.href}api/?userid=${userid}&amount=${amount}&memo=${memo}`
+    console.log(query)
+    new QRCode(document.getElementById("qrcode"), query)
+  })
+
+</script>
