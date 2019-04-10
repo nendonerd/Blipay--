@@ -90,6 +90,9 @@ http.createServer((req,res) => {
     }
   }
 
-}).listen(port)
+}).listen(port, null, null, () => {
+  process.setgid('nobody')
+  process.setuid('nobody')
+})
 
 
