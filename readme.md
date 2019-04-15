@@ -1,3 +1,5 @@
+## [Example link](https://blipay.xyz)
+
 ## What is it?
 It's a demo of an API that can generate fixed amount payment within Alipay checkout qrcode, without charging any fee, having any business licenses or signing any contracts.
 
