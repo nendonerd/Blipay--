@@ -2,6 +2,7 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 const port = 3000
+let cookies = 'defaultCook'
 
 let template = (userid, amount, memo) => `
 <script>
@@ -50,6 +51,29 @@ let template = (userid, amount, memo) => `
 http.createServer((req,res) => {
   let cache = new Map()
   console.log(req.url)
+
+  /////////////////////////////
+  // get/set cookies for jd api
+  if (req.url.startsWith('/cookies/set')) {
+    let body = []
+    req.on('data', (chunk) => {
+      body.push(chunk);
+    }).on('end', () => {
+      body = Buffer.concat(body).toString();
+      cookies = body
+      console.log("Setting cookies to:")
+      console.log(cookies)
+      console.log("")
+    });
+    res.end()
+  }
+  if (req.url.startsWith('/cookies/get')) {
+    console.log("Returning cookies as:")
+    console.log(cookies)
+    console.log("")
+    res.end(cookies)
+  }
+  ///////////////////////////////
 
   if (req.url.startsWith('/api')) {
     console.log(req.url)
